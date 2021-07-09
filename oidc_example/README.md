@@ -8,13 +8,16 @@ in it, so that will run on a random port (8000 in the example below) and
 `simple_op` runs on port 443 - the standard https port.
 
 Run the following:
+1. Install python 3.6 `sudo apt install python3.6-dev`
+2. In the project home directory, create a virtualenv `virtualenv -p python3.6 .`
+3. Activate the virtualenv `source bin/activate`
+4. Install oic from source using `python setup.py install`
+5. In the `oidc_example/simple_op` directory install `requirements.txt` using `pip install -r requirements.txt`
+6. In the `oidc_example/simple_rp` directory install `requirements.txt` using `pip install -r requirements.txt`
+7. In the `oidc_example/simple_op` Start the op server on port 443 in using `sudo ../../bin/python3.6 src/run.py settings.yaml.example -p 443`
+8. Another terminal, In the `oidc_example/simple_rp` directory, Start the rp server on port 8000 in `simple_rp` using `sudo ../../bin/python3.6 src/rp.py settings.yaml.example -p 8000`
+9. Open the rp server in a browser, <https://localhost:8000/>
+10. Enter the uid `localhost` to connect to the simple op server
+11. Login using the credentials in `username: diana` and `password: krall`
+12. Observe the user info is loaded by the RP server
 
-1. Install oic from source using `python setup.py install`
-1. Install `requirements.txt` for `simple_op` using `pip install -r requirements.txt`
-1. Install `requirements.txt` for `simple_rp` using `pip install -r requirements.txt`
-1. Start the op server on port 443 in `simple_op` using `python src/run.py settings.yaml.example -p 443`
-1. Start the rp server on port 8000 in `simple_rp` using `python src/rp.py settings.yaml.example -p 8000`
-1. Open the rp server in a browser, <https://localhost:8000/>
-1. Enter the uid `localhost` to connect to the simple op server
-1. Login using the credentials in `simple_op/passwd.json` (this is referenced in the simple op example settings)
-1. Observe the user info is loaded by the RP server
