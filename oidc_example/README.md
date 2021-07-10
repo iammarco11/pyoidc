@@ -21,3 +21,6 @@ Run the following:
 11. Login using the credentials in `username: diana` and `password: krall`
 12. Observe the user info is loaded by the RP server
 
+### Note:
+The authentication calls are done in the `simple_rp/src/rp.py` under implicit_hybrid_flow method. The time taken will be logged in the terminal where rp is being run.
+
