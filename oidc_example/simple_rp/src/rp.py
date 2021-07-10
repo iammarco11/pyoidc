@@ -1,5 +1,6 @@
 import argparse
 import os
+import time
 
 import cherrypy
 import yaml
@@ -129,7 +130,7 @@ class RPServer(object):
             pass
         return html_page.format(authz_code, access_token,
                                 response["id_token"], userinfo)
-
+        
     @cherrypy.expose
     def code_flow(self, **kwargs):
         if "error" in kwargs:
@@ -151,13 +152,17 @@ class RPServer(object):
 
     @cherrypy.expose
     def implicit_hybrid_flow(self, **kwargs):
-        return self._load_HTML_page_from_file("htdocs/repost_fragment.html")
+        start = time.process_time()
+        return self._load_HTML_page_from_file("htdocs/repost_fragment.html", start)
 
-    def _load_HTML_page_from_file(self, path):
+    def _load_HTML_page_from_file(self, path, start_time=None):
         if not path.startswith("/"): # relative path
             # prepend the root package dir
             path = os.path.join(os.path.dirname(__file__), path)
-
+            end = time.process_time()
+            if start_time is not None:
+                print("Time taken for the hybrid flow authentication :")
+                print(end-start_time)
         with open(path, "r") as f:
             return f.read()
 
